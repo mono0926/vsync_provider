@@ -8,7 +8,7 @@ class SingleTickerPage extends StatelessWidget {
 
   static const routeName = '/single_ticker';
 
-  static Widget withVsync() {
+  static Widget withModel() {
     return MultiProvider(
       providers: [
         VsyncProvider(),

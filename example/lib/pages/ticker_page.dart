@@ -8,7 +8,7 @@ class TickerPage extends StatelessWidget {
 
   static const routeName = '/ticker';
 
-  static Widget withVsync() {
+  static Widget withModel() {
     return MultiProvider(
       providers: [
         VsyncProvider(isSingleTicker: false),

@@ -12,8 +12,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: const _HomePage(),
       routes: {
-        SingleTickerPage.routeName: (context) => SingleTickerPage.withVsync(),
-        TickerPage.routeName: (context) => TickerPage.withVsync(),
+        SingleTickerPage.routeName: (context) => SingleTickerPage.withModel(),
+        TickerPage.routeName: (context) => TickerPage.withModel(),
       },
     );
   }
