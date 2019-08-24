@@ -1,6 +1,6 @@
 name: vsync_provider
 description: VsyncProvider
-version: 0.1.0
+version: 0.1.0+1
 author: Masayuki Ono <mono0926@gmail.com>
 homepage: https://github.com/mono0926/vsync_provider
 environment:
