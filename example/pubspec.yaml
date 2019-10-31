@@ -8,7 +8,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   vsync_provider:
-    path: ../../vsync_provider
+    path: ..
   disposable_provider:
 dev_dependencies:
   flutter_test:
