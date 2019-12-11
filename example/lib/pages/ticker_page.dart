@@ -13,7 +13,7 @@ class TickerPage extends StatelessWidget {
       providers: [
         VsyncProvider(isSingleTicker: false),
         DisposableProvider(
-          builder: (context) => _Model(
+          create: (context) => _Model(
             vsync: VsyncProvider.of(context),
           ),
         )
