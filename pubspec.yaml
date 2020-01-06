@@ -1,14 +1,13 @@
 name: vsync_provider
 description: VsyncProvider provides vsync for AnimationController. This works with provider package.
-version: 0.2.0
-author: Masayuki Ono <mono0926@gmail.com>
+version: 0.3.0
 homepage: https://github.com/mono0926/vsync_provider
 environment:
   sdk: ">=2.6.0 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^3.2.0
+  provider: ^4.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

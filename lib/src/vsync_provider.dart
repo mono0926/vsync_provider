@@ -1,59 +1,46 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
-class VsyncProvider extends ValueDelegateWidget<GlobalKey>
-    implements SingleChildCloneableWidget {
+class VsyncProvider extends SingleChildStatelessWidget {
   VsyncProvider({
     Key key,
-    this.child,
+    Widget child,
     this.isSingleTicker = true,
-  }) : super(
-          key: key,
-          delegate: BuilderStateDelegate<GlobalKey>(
-            (context) => isSingleTicker
-                ? GlobalKey<_SingleTickerWidgetState>() as GlobalKey
-                : GlobalKey<_TickerWidgetState>() as GlobalKey,
-          ),
-        );
+  }) : super(key: key, child: child);
 
-  final Widget child;
   final bool isSingleTicker;
 
   @override
-  Widget build(BuildContext context) {
-    final delegate = this.delegate as BuilderStateDelegate<GlobalKey>;
-    // Get TickerProvider from State.
-    // Is it better to create TickerProvider on your own?
-    final tickerKey = delegate.value;
-    final child = Builder(
-      builder: (context) {
-        final tickerProvider = isSingleTicker
-            ? tickerKey.currentState as TickerProvider
-            : tickerKey.currentState as TickerProvider;
-        return InheritedProvider<TickerProvider>(
-          value: tickerProvider,
-          updateShouldNotify: (_, __) => false,
-          child: this.child,
-        );
+  Widget buildWithChild(BuildContext context, Widget child) {
+    return Provider(
+      create: (context) {
+        return isSingleTicker
+            ? GlobalKey<_SingleTickerWidgetState>() as GlobalKey
+            : GlobalKey<_TickerWidgetState>() as GlobalKey;
       },
-    );
-    return isSingleTicker
-        ? _SingleTickerWidget(
-            key: tickerKey,
-            child: child,
-          )
-        : _TickerWidget(
-            key: tickerKey,
-            child: child,
+      child: Consumer<GlobalKey>(
+        builder: (context, tickerKey, _child) {
+          final provider = Builder(
+            builder: (context) {
+              return Provider<TickerProvider>.value(
+                value: tickerKey.currentState as TickerProvider,
+                updateShouldNotify: (_, __) => false,
+                child: child,
+              );
+            },
           );
-  }
-
-  @override
-  SingleChildCloneableWidget cloneWithChild(Widget child) {
-    return VsyncProvider(
-      key: key,
-      child: child,
-      isSingleTicker: isSingleTicker,
+          return isSingleTicker
+              ? _SingleTickerWidget(
+                  key: tickerKey,
+                  child: provider,
+                )
+              : _TickerWidget(
+                  key: tickerKey,
+                  child: provider,
+                );
+        },
+      ),
     );
   }
 
