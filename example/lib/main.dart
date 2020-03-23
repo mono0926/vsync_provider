@@ -1,3 +1,4 @@
+import 'package:example/pages/mute_feature_page.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/single_ticker_page.dart';
@@ -14,6 +15,7 @@ class App extends StatelessWidget {
       routes: {
         SingleTickerPage.routeName: (context) => SingleTickerPage.withModel(),
         TickerPage.routeName: (context) => TickerPage.withModel(),
+        MuteFeaturePage.routeName: (context) => MuteFeaturePage.withModel(),
       },
     );
   }
@@ -39,6 +41,12 @@ class _HomePage extends StatelessWidget {
             title: const Text('Ticker'),
             trailing: Icon(Icons.chevron_right),
             onTap: () => Navigator.of(context).pushNamed(TickerPage.routeName),
+          ),
+          ListTile(
+            title: const Text('Mute Feature'),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () =>
+                Navigator.of(context).pushNamed(MuteFeaturePage.routeName),
           )
         ],
       ),
