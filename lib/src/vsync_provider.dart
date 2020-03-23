@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class VsyncProvider extends SingleChildStatelessWidget {
-  VsyncProvider({
+  const VsyncProvider({
     Key key,
     Widget child,
     this.isSingleTicker = true,
@@ -13,34 +13,9 @@ class VsyncProvider extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget child) {
-    return Provider(
-      create: (context) {
-        return isSingleTicker
-            ? GlobalKey<_SingleTickerWidgetState>() as GlobalKey
-            : GlobalKey<_TickerWidgetState>() as GlobalKey;
-      },
-      child: Consumer<GlobalKey>(
-        builder: (context, tickerKey, _child) {
-          final provider = Builder(
-            builder: (context) {
-              return Provider<TickerProvider>.value(
-                value: tickerKey.currentState as TickerProvider,
-                updateShouldNotify: (_, __) => false,
-                child: child,
-              );
-            },
-          );
-          return isSingleTicker
-              ? _SingleTickerWidget(
-                  key: tickerKey,
-                  child: provider,
-                )
-              : _TickerWidget(
-                  key: tickerKey,
-                  child: provider,
-                );
-        },
-      ),
+    return _TickerWidget(
+      isSingleTicker: isSingleTicker,
+      child: child,
     );
   }
 
@@ -62,42 +37,38 @@ class VsyncProvider extends SingleChildStatelessWidget {
   }
 }
 
-class _SingleTickerWidget extends StatefulWidget {
-  const _SingleTickerWidget({
+class _TickerWidget extends SingleChildStatefulWidget {
+  const _TickerWidget({
     Key key,
-    this.child,
-  }) : super(key: key);
+    @required this.isSingleTicker,
+    Widget child,
+  }) : super(key: key, child: child);
 
-  final Widget child;
+  final bool isSingleTicker;
 
   @override
-  _SingleTickerWidgetState createState() => _SingleTickerWidgetState();
+  State createState() =>
+      isSingleTicker ? _SingleTickerWidgetState() : _TickerWidgetState();
 }
 
-class _SingleTickerWidgetState extends State<_SingleTickerWidget>
+class _SingleTickerWidgetState extends SingleChildState<_TickerWidget>
     with SingleTickerProviderStateMixin {
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
+  Widget buildWithChild(BuildContext context, Widget child) {
+    return Provider<TickerProvider>.value(
+      value: this,
+      child: child,
+    );
   }
 }
 
-class _TickerWidget extends StatefulWidget {
-  const _TickerWidget({
-    Key key,
-    this.child,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  _TickerWidgetState createState() => _TickerWidgetState();
-}
-
-class _TickerWidgetState extends State<_TickerWidget>
+class _TickerWidgetState extends SingleChildState<_TickerWidget>
     with TickerProviderStateMixin {
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
+  Widget buildWithChild(BuildContext context, Widget child) {
+    return Provider<TickerProvider>.value(
+      value: this,
+      child: child,
+    );
   }
 }
