@@ -1,3 +1,8 @@
+## 0.4.1
+
+- The mute feature, which is disabled by this package mistakenly, is now fixed
+  - See "Mute Feature" page of example
+
 ## 0.4.0
 
 - Update provider to 4.0.4
