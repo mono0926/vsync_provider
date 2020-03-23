@@ -11,7 +11,7 @@ class SingleTickerPage extends StatelessWidget {
   static Widget withModel() {
     return MultiProvider(
       providers: [
-        VsyncProvider(),
+        const VsyncProvider(),
         DisposableProvider(
           create: (context) => _Model(
             vsync: VsyncProvider.of(context),
@@ -48,7 +48,7 @@ class _Model implements Disposable {
     @required TickerProvider vsync,
   }) : _animationController = AnimationController(
           vsync: vsync,
-          duration: Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 1000),
         );
 
   final AnimationController _animationController;
