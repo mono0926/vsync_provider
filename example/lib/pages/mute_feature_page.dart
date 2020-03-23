@@ -11,9 +11,9 @@ class MuteFeaturePage extends StatelessWidget {
   static Widget withModel() {
     return MultiProvider(
       providers: [
-        VsyncProvider(),
+        const VsyncProvider(),
         DisposableProvider(
-          create: (context) => _Model(
+          create: (context) => _Controller(
             vsync: VsyncProvider.of(context),
           ),
         )
@@ -24,33 +24,56 @@ class MuteFeaturePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<_Model>(context);
+    final controller = Provider.of<_Controller>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(routeName),
       ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Next Page'),
-          onPressed: () => Navigator.of(context).push<void>(
-            MaterialPageRoute(
-              builder: (context) => Scaffold(
-                appBar: AppBar(),
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text(
+              'This value changes on this page, '
+              'but after navigated to next page, '
+              'the animation will be stopped.'
+              '(See print log)',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            AnimatedBuilder(
+              animation: controller.animation,
+              builder: (context, value) => Text(
+                '${controller.animation.value.toStringAsFixed(3)}',
+                style: Theme.of(context).textTheme.headline4,
               ),
             ),
-          ),
+            const SizedBox(height: 16),
+            RaisedButton(
+              child: const Text('Next Page'),
+              onPressed: () => Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _Model implements Disposable {
-  _Model({
+class _Controller implements Disposable {
+  _Controller({
     @required TickerProvider vsync,
   }) : _animationController = AnimationController(
           vsync: vsync,
-          duration: const Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 10000),
         )..repeat() {
     _animationController.addListener(
       () => print('value: ${_animationController.value}'),

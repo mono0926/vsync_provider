@@ -55,6 +55,7 @@ class _SingleTickerWidgetState extends SingleChildState<_TickerWidget>
     with SingleTickerProviderStateMixin {
   @override
   Widget buildWithChild(BuildContext context, Widget child) {
+    _triggerTickerMutedUpdate(context);
     return Provider<TickerProvider>.value(
       value: this,
       child: child,
@@ -66,9 +67,14 @@ class _TickerWidgetState extends SingleChildState<_TickerWidget>
     with TickerProviderStateMixin {
   @override
   Widget buildWithChild(BuildContext context, Widget child) {
+    _triggerTickerMutedUpdate(context);
     return Provider<TickerProvider>.value(
       value: this,
       child: child,
     );
   }
+}
+
+void _triggerTickerMutedUpdate(BuildContext context) {
+  TickerMode.of(context);
 }
