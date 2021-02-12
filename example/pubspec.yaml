@@ -2,15 +2,15 @@ name: example
 description: Example
 version: 1.0.0+1
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.12.0-0 <3.0.0"
 dependencies:
+  cupertino_icons:
+  disposable_provider:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.2
+  provider:
   vsync_provider:
     path: ..
-  provider:
-  disposable_provider:
 dev_dependencies:
   flutter_test:
     sdk: flutter

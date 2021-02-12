@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vsync_provider/vsync_provider.dart';
 
 class SingleTickerPage extends StatelessWidget {
-  const SingleTickerPage._({Key key}) : super(key: key);
+  const SingleTickerPage._({Key? key}) : super(key: key);
 
   static const routeName = '/single_ticker';
 
@@ -45,7 +45,7 @@ class SingleTickerPage extends StatelessWidget {
 
 class _Model implements Disposable {
   _Model({
-    @required TickerProvider vsync,
+    required TickerProvider vsync,
   }) : _animationController = AnimationController(
           vsync: vsync,
           duration: const Duration(milliseconds: 1000),

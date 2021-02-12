@@ -4,15 +4,15 @@ import 'package:provider/single_child_widget.dart';
 
 class VsyncProvider extends SingleChildStatelessWidget {
   const VsyncProvider({
-    Key key,
-    Widget child,
+    Key? key,
+    Widget? child,
     this.isSingleTicker = true,
   }) : super(key: key, child: child);
 
   final bool isSingleTicker;
 
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     return _TickerWidget(
       isSingleTicker: isSingleTicker,
       child: child,
@@ -39,9 +39,9 @@ class VsyncProvider extends SingleChildStatelessWidget {
 
 class _TickerWidget extends SingleChildStatefulWidget {
   const _TickerWidget({
-    Key key,
-    @required this.isSingleTicker,
-    Widget child,
+    Key? key,
+    required this.isSingleTicker,
+    Widget? child,
   }) : super(key: key, child: child);
 
   final bool isSingleTicker;
@@ -54,7 +54,7 @@ class _TickerWidget extends SingleChildStatefulWidget {
 class _SingleTickerWidgetState extends SingleChildState<_TickerWidget>
     with SingleTickerProviderStateMixin {
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     _triggerTickerMutedUpdate(context);
     return Provider<TickerProvider>.value(
       value: this,
@@ -66,7 +66,7 @@ class _SingleTickerWidgetState extends SingleChildState<_TickerWidget>
 class _TickerWidgetState extends SingleChildState<_TickerWidget>
     with TickerProviderStateMixin {
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     _triggerTickerMutedUpdate(context);
     return Provider<TickerProvider>.value(
       value: this,

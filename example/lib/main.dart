@@ -7,7 +7,7 @@ import 'pages/ticker_page.dart';
 void main() => runApp(const App());
 
 class App extends StatelessWidget {
-  const App({Key key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
 }
 
 class _HomePage extends StatelessWidget {
-  const _HomePage({Key key}) : super(key: key);
+  const _HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,18 +33,18 @@ class _HomePage extends StatelessWidget {
         children: [
           ListTile(
             title: const Text('SingleTicker'),
-            trailing: Icon(Icons.chevron_right),
+            trailing: const Icon(Icons.chevron_right),
             onTap: () =>
                 Navigator.of(context).pushNamed(SingleTickerPage.routeName),
           ),
           ListTile(
             title: const Text('Ticker'),
-            trailing: Icon(Icons.chevron_right),
+            trailing: const Icon(Icons.chevron_right),
             onTap: () => Navigator.of(context).pushNamed(TickerPage.routeName),
           ),
           ListTile(
             title: const Text('Mute Feature'),
-            trailing: Icon(Icons.chevron_right),
+            trailing: const Icon(Icons.chevron_right),
             onTap: () =>
                 Navigator.of(context).pushNamed(MuteFeaturePage.routeName),
           )

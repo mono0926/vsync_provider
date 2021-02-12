@@ -1,3 +1,7 @@
+## 0.5.0
+
+- Migrate to null safety
+
 ## 0.4.1
 
 - The mute feature, which is disabled by this package mistakenly, is now fixed

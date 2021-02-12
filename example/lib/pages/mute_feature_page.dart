@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vsync_provider/vsync_provider.dart';
 
 class MuteFeaturePage extends StatelessWidget {
-  const MuteFeaturePage._({Key key}) : super(key: key);
+  const MuteFeaturePage._({Key? key}) : super(key: key);
 
   static const routeName = '/mute_feature';
 
@@ -51,7 +51,7 @@ class MuteFeaturePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            RaisedButton(
+            ElevatedButton(
               child: const Text('Next Page'),
               onPressed: () => Navigator.of(context).push<void>(
                 MaterialPageRoute(
@@ -70,7 +70,7 @@ class MuteFeaturePage extends StatelessWidget {
 
 class _Controller implements Disposable {
   _Controller({
-    @required TickerProvider vsync,
+    required TickerProvider vsync,
   }) : _animationController = AnimationController(
           vsync: vsync,
           duration: const Duration(milliseconds: 10000),
