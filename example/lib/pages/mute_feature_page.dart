@@ -47,7 +47,7 @@ class MuteFeaturePage extends StatelessWidget {
               animation: controller.animation,
               builder: (context, value) => Text(
                 '${controller.animation.value.toStringAsFixed(3)}',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
