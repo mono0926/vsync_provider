@@ -76,5 +76,5 @@ class _TickerWidgetState extends SingleChildState<_TickerWidget>
 }
 
 void _triggerTickerMutedUpdate(BuildContext context) {
-  TickerMode.of(context);
+  TickerMode.valuesOf(context);
 }
