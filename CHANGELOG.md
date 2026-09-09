@@ -1,3 +1,8 @@
+## 0.5.1
+
+- Add AI Agent Skill (`vsync_provider-animation`)
+- Replace deprecated `TickerMode.of` with `valuesOf` and fix analyzer issues
+
 ## 0.5.0
 
 - Migrate to null safety
