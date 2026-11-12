@@ -1,6 +1,6 @@
 name: vsync_provider
 description: VsyncProvider provides vsync for AnimationController. This works with provider package.
-version: 0.5.1
+version: 0.6.0
 repository: https://github.com/mono0926/vsync_provider
 environment:
   sdk: ^3.14.0

@@ -1,3 +1,10 @@
+## 0.6.0
+
+- Require Dart `^3.14.0` and Flutter `>=3.50.0`
+- Upgrade `provider` constraint to `^6.1.5`
+- Adopt Dart primary constructors and `pedantic_mono` lints
+- Migrate example app to `material_ui`
+
 ## 0.5.1
 
 - Add AI Agent Skill (`vsync_provider-animation`)
