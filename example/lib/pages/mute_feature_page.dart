@@ -1,11 +1,9 @@
 import 'package:disposable_provider/disposable_provider.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:vsync_provider/vsync_provider.dart';
 
-class MuteFeaturePage extends StatelessWidget {
-  const MuteFeaturePage._({Key? key}) : super(key: key);
-
+class const MuteFeaturePage._() extends StatelessWidget {
   static const routeName = '/mute_feature';
 
   static Widget withModel() {
@@ -16,7 +14,7 @@ class MuteFeaturePage extends StatelessWidget {
           create: (context) => _Controller(
             vsync: VsyncProvider.of(context),
           ),
-        )
+        ),
       ],
       child: const MuteFeaturePage._(),
     );
@@ -46,7 +44,7 @@ class MuteFeaturePage extends StatelessWidget {
             AnimatedBuilder(
               animation: controller.animation,
               builder: (context, value) => Text(
-                '${controller.animation.value.toStringAsFixed(3)}',
+                controller.animation.value.toStringAsFixed(3),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
@@ -68,19 +66,19 @@ class MuteFeaturePage extends StatelessWidget {
   }
 }
 
-class _Controller implements Disposable {
-  _Controller({
-    required TickerProvider vsync,
-  }) : _animationController = AnimationController(
-          vsync: vsync,
-          duration: const Duration(milliseconds: 10000),
-        )..repeat() {
+class _Controller({
+  required TickerProvider vsync,
+}) implements Disposable {
+  this {
     _animationController.addListener(
-      () => print('value: ${_animationController.value}'),
+      () => debugPrint('value: ${_animationController.value}'),
     );
   }
 
-  final AnimationController _animationController;
+  final AnimationController _animationController = AnimationController(
+    vsync: vsync,
+    duration: const Duration(milliseconds: 10000),
+  )..repeat();
 
   Animation<double> get animation => _animationController;
 
