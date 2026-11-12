@@ -1,13 +1,12 @@
 import 'package:example/pages/mute_feature_page.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'pages/single_ticker_page.dart';
 import 'pages/ticker_page.dart';
 
 void main() => runApp(const App());
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class const App({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,8 +20,7 @@ class App extends StatelessWidget {
   }
 }
 
-class _HomePage extends StatelessWidget {
-  const _HomePage({Key? key}) : super(key: key);
+class const _HomePage() extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +45,7 @@ class _HomePage extends StatelessWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () =>
                 Navigator.of(context).pushNamed(MuteFeaturePage.routeName),
-          )
+          ),
         ],
       ),
     );
